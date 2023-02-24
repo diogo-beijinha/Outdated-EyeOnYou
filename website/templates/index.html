@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		{% load static %}
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Página Inicial</title>
+		<link rel="shortcut icon" href="{% static 'images/home.ico' %}">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}" />
+		<!--[if IE]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<style>
+			.menu--sebastian .menu__link:hover
+			{
+				color: #d94f5c;
+				margin: 0px 16.8px;
+				padding: 16.8px;
+				border-top: 1px solid #d94f5c;
+				border-bottom: 2px solid #d94f5c;
+			}
+
+}
+		</style>
+	</head>
+	<body style="background-color: #2a282b;">
+
+	<script>
+		function irpara(pagina)
+		{
+			if(pagina == "Registo")
+			{
+				window.location.href = "../../facial/registo/";
+			}
+			else
+			{
+				window.location.href = "../../facial/recon/";
+			}
+
+		}
+	</script>
+		<div class="container" style="background-color: #2a282b;">
+
+			<section class="section section--menu" id="Sebastian">
+				<div>
+					<!--<h2 class="section__title" style="font-size: 1vw;">EyeOnYou</h2>-->
+					<a href="#"><img src="{% static 'images/gif_logo_trans.gif' %}" style="width: 14%; height: auto; position: absolute; top: 20%; left: 43%;" draggable="false"></a>
+				</div>
+
+				<span class="link-copy"></span>
+				<nav class="menu menu--sebastian" style="position: absolute; top: 55%;">
+					<ul class="menu__list">
+						<li class="menu__item menu__item--current"><a href="#" class="menu__link">Home</a></li>
+						{% if request.user.is_superuser %}
+							<li id="consolebtn" class="menu__item"><a href="../../pages/consola/" class="menu__link">Consola</a></li>
+						{% endif %}
+						<li class="menu__item"><a href="../../pages/utilizadores/" class="menu__link">Utilizadores</a></li>
+						{% if request.user.is_superuser %}
+							<li class="menu__item"><a href="../../pages/registados/" class="menu__link">Registados</a></li>
+						{% endif %}
+						<li class="menu__item"><a href="../../pages/alertas/" class="menu__link">Alertas</a></li>
+						<li class="menu__item"><a href="../../pages/logs/" class="menu__link">Logs</a></li>
+						<li class="menu__item"><a href="#" class="menu__link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sistema Facial</a></li>
+						<li class="menu__item"><a href="../../conta" class="menu__link">Conta</a></li>
+					</ul>
+				</nav>
+			</section>
+
+		</div>
+		<!-- /container -->
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Sistema Facial</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Para que página deseja ser redirecionado/a?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="irpara(this.textContent)">Registo</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="irpara(this.textContent)">Reconhecimento</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+</html>

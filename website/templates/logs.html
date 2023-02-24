@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Logs | EyeOnYou</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logs.ico' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Bootstrap CSS | Put above all other stylesheets!!-->
+    <link rel="stylesheet" href="{% static 'css/site.css' %}" />
+    <style>
+
+        body, html {
+            height: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            background-color: rgb(21, 32, 40);
+        }
+
+        .adminCheck:focus
+      {
+        pointer-events: none;
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      #box1
+      {
+       z-index: 1;
+       position: absolute; top: 0%;
+      }
+
+      #sidebar
+      {
+        z-index: 3;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</head>
+<body onload="calc_dim()">
+    <main>
+  <div style="width:2px; background-color: grey;" class="b-example-divider"></div>
+        <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; position: absolute; top: 0px;">
+            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                <span id="logoName" class="fs-4">EyeOnYou</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="../" class="nav-link text-white" aria-current="page">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8.5%" height="8.5%" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                        </svg>
+                        P&aacute;gina Inicial
+                    </a>
+                </li>
+                <li>
+                    <a href="../consola/" class="nav-link text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8.5%" height="8.5%" fill="currentColor" class="bi bi-terminal-fill" viewBox="0 0 16 16">
+                            <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm9.5 5.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm-6.354-.354a.5.5 0 1 0 .708.708l2-2a.5.5 0 0 0 0-.708l-2-2a.5.5 0 1 0-.708.708L4.793 6.5 3.146 8.146z"/>
+                        </svg>
+                        Consola
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../utilizadores/" class="nav-link text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8.5%" height="8.5%" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                        Utilizadores
+                    </a>
+                </li>
+                <li>
+                    <a href="../alertas/" class="nav-link text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8.5%" height="8.5%" fill="currentColor" class="bi bi-exclamation-diamond-fill" viewBox="0 0 16 16">
+                            <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098L9.05.435zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                        Alertas
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a class="nav-link active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8.5%" height="8.5%" fill="currentColor" class="bi bi-file-earmark-binary-fill" viewBox="0 0 16 16">
+                            <path d="M5.526 10.273c-.542 0-.832.563-.832 1.612 0 .088.003.173.006.252l1.559-1.143c-.126-.474-.375-.72-.733-.72zm-.732 2.508c.126.472.372.718.732.718.54 0 .83-.563.83-1.614 0-.085-.003-.17-.006-.25l-1.556 1.146z"/>
+                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-2.45 8.385c0 1.415-.548 2.206-1.524 2.206C4.548 14.09 4 13.3 4 11.885c0-1.412.548-2.203 1.526-2.203.976 0 1.524.79 1.524 2.203zm3.805 1.52V14h-3v-.595h1.181V10.5h-.05l-1.136.747v-.688l1.19-.786h.69v3.633h1.125z"/>
+                        </svg>
+                        Logs
+                    </a>
+                </li>
+                {% if request.user.is_superuser %}
+        <li>
+        <a href="../registados/" class="nav-link text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+          </svg>
+          Registados
+        </a>
+      </li>
+		{% endif %}
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://www.pngfind.com/pngs/m/381-3819326_default-avatar-svg-png-icon-free-download-avatar.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>{{user.username}}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="../../conta">Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Definições</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="../../contalogout/">Terminar Sessão</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="box1" style="background-color: #152028; height: 100%; width: 100%;">
+        </div>
+</main>
+
+    <table class="table table-hover table-dark" id="tabelaAlertas" style="position: absolute; left: 30%; z-index: 9;">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Apelido</th>
+                <th scope="col">Data</th>
+                <th scope="col">Reconhecido</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dect in detected %}
+                <tr>
+                    {% if dect.first_name != "Desconhecido" %}
+                        <th scope="row" style="color: green;">{{dect.pk}}</th>
+                        <td style="color: green;">{{dect.first_name}}</td>
+                        <td style="color: green;">{{dect.last_name}}</td>
+                        <td style="color: green;">{{dect.date}}</td>
+                        <td>
+                            {% if dect.recognized %}
+                                <input type="checkbox" class="adminCheck" checked>
+                            {% else %}
+                                <input type="checkbox" class="adminCheck">
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function calc_dim()
+        {
+            console.log(window.innerWidth);
+            //Sidebar
+            var height = window.innerHeight;
+            var sidebar = document.getElementById("sidebar");
+            height = height.toString();
+            height = height + 'px';
+            sidebar.style.height = height;
+
+            //Black Screen
+            var sidebar = document.getElementById("sidebar");
+            var black = document.getElementById("box1");
+            black.style.height = height;
+            var width = window.innerWidth;
+            var blackWidth = black.clientWidth;
+            var sideWidth = sidebar.clientWidth;
+            sidebar.style.width = '18%';
+            sidebar.style.fontSize = '1vw';
+            blackWidth = width - sideWidth;
+
+            //Tabela
+            var tabela = document.getElementById("tabelaAlertas");
+            tabela.style.width = (blackWidth - 300) + "px";
+        }
+    </script>
+
+    <!--Bootstrap Bundle-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="{% static 'js/sidebars.js' %}"></script>
+</body>
+</html>
